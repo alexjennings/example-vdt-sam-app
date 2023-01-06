@@ -1,0 +1,30 @@
+{
+  "name": "example-vdt-function",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "app.js",
+  "private": true,
+  "scripts": {},
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 2022,
+      "sourceType": "module"
+    },
+    "extends": [
+      "@vidispine/eslint-config-base"
+    ],
+    "rules": {
+      "no-console": "off"
+    }
+  },
+  "prettier": "@vidispine/prettier-config",
+  "dependencies": {
+    "@vidispine/vdt-api": "22.4.0",
+    "@vidispine/vdt-js": "22.4.0"
+  },
+  "devDependencies": {
+    "@vidispine/eslint-config-base": "^22.4.0",
+    "@vidispine/prettier-config": "^22.4.0",
+    "prettier": "^2.8.1"
+  }
+}

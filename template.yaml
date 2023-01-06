@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  ExampleVdtFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Environment:
+        Variables:
+          VIDISPINE_URL: "https://example.myvidispine.com"
+      CodeUri: example-vdt-function/
+      # Handler: app.lambdaHandler
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        ExampleVdt:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+
+Outputs:
+  ExampleVdtApi:
+    Description: "API Gateway endpoint URL for Prod stage for Example VDT function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  ExampleVdtFunction:
+    Description: "Example VDT Function ARN"
+    Value: !GetAtt ExampleVdtFunction.Arn
+  ExampleVdtFunctionIamRole:
+    Description: "Implicit IAM Role created for Example VDT function"
+    Value: !GetAtt ExampleVdtFunction.Arn

@@ -1,0 +1,10 @@
+{
+  "body": "",
+  "path": "/",
+  "httpMethod": "POST",
+  "queryStringParameters": {},
+  "pathParameters": {},
+  "headers": {
+    "Token": "MY_VIDISPINE_TOKEN"
+  }
+}
