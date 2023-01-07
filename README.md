@@ -1,4 +1,4 @@
-# vidispine-sam-app
+# example-vdt-sam-app
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
@@ -13,7 +13,7 @@ The application uses several AWS resources, including Lambda functions and an AP
 This project contains settings and recommended extensions for VSCode. Install the extensions for code linting and formatting.
 
 ```bash
-vidispine-sam-app$ cd example-vdt-function && npm install
+example-vdt-sam-app$ cd example-vdt-function && npm install
 ```
 
 ## Use the SAM CLI to build and test locally
@@ -21,7 +21,7 @@ vidispine-sam-app$ cd example-vdt-function && npm install
 Build your application with the `sam build` command.
 
 ```bash
-vidispine-sam-app$ sam build
+example-vdt-sam-app$ sam build
 ```
 
 The SAM CLI installs dependencies defined in `example-vdt-function/package.json`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
@@ -31,14 +31,20 @@ Test a single function by invoking it directly with a test event. An event is a 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-vidispine-sam-app$ sam local invoke ExampleVdtFunction --event events/event.json
+example-vdt-sam-app$ echo '{"headers": { "Token": "MY_VIDISPINE_TOKEN" } }' | sam local invoke --event - ExampleVdtFunction
+```
+
+Or specify the token in `events/event.json`:
+
+```bash
+example-vdt-sam-app$ sam local invoke ExampleVdtFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
 
 ```bash
-vidispine-sam-app$ sam local start-api
-vidispine-sam-app$ curl http://localhost:3000/ -H 'Token: MY_VIDISPINE_TOKEN'
+example-vdt-sam-app$ sam local start-api
+example-vdt-sam-app$ curl http://localhost:3000/ -H 'Token: MY_VIDISPINE_TOKEN'
 ```
 
 The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
@@ -90,7 +96,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-vidispine-sam-app$ sam logs -n ExampleVdtFunction --stack-name vidispine-sam-app --tail
+example-vdt-sam-app$ sam logs -n ExampleVdtFunction --stack-name example-vdt-sam-app --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
@@ -100,7 +106,7 @@ You can find more information and examples about filtering Lambda function logs 
 To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
 
 ```bash
-aws cloudformation delete-stack --stack-name vidispine-sam-app
+aws cloudformation delete-stack --stack-name example-vdt-sam-app
 ```
 
 ## Resources

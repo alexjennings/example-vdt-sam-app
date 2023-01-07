@@ -7,7 +7,7 @@
     {
       "type": "aws-sam",
       "request": "direct-invoke",
-      "name": "vidispine-sam-app:ExampleVdtFunction",
+      "name": "example-vdt-sam-app:ExampleVdtFunction",
       "invokeTarget": {
         "target": "template",
         "templatePath": "${workspaceFolder}/template.yaml",
