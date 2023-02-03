@@ -6,11 +6,14 @@ const {
 } = require('@vidispine/vdt-api');
 const { createMetadataType, parseMetadataType } = require('@vidispine/vdt-js');
 
+const headersToLowerCase = (headers) =>
+  Object.entries(headers).reduce((a, [key, value]) => ({ ...a, [key.toLowerCase()]: value }), {});
+
 const { VIDISPINE_URL } = process.env;
-const TOKEN_HEADER = 'Token';
+const TOKEN_HEADER = 'token';
 
 module.exports.handler = async (event) => {
-  const { headers } = event;
+  const headers = headersToLowerCase(event.headers || {});
   const { [TOKEN_HEADER]: token } = headers;
   try {
     /**
@@ -59,7 +62,7 @@ module.exports.handler = async (event) => {
 
     return {
       statusCode,
-      body: metadata,
+      body: JSON.stringify(metadata),
     };
   } catch (err) {
     console.log(err);
