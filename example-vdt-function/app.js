@@ -6,21 +6,26 @@ const {
 } = require('@vidispine/vdt-api');
 const { createMetadataType, parseMetadataType } = require('@vidispine/vdt-js');
 
-const headersToLowerCase = (headers) =>
+const headersToLowerCase = (headers = {}) =>
   Object.entries(headers).reduce((a, [key, value]) => ({ ...a, [key.toLowerCase()]: value }), {});
 
-const { VIDISPINE_URL } = process.env;
+const { VIDISPINE_URL, VIDISPINE_TOKEN, VIDISPINE_ACCESS_KEY, VIDISPINE_SECRET_KEY } = process.env;
 const TOKEN_HEADER = 'token';
 
 module.exports.handler = async (event) => {
-  const headers = headersToLowerCase(event.headers || {});
-  const { [TOKEN_HEADER]: token } = headers;
+  const headers = headersToLowerCase(event?.headers || {});
+  const { [TOKEN_HEADER]: token = VIDISPINE_TOKEN } = headers;
   try {
     /**
      * api.login sets the axios client configuration for all subsequent requests
      * Also accepts "username" and "password" params
      */
-    api.login({ baseURL: VIDISPINE_URL, token });
+    api.login({
+      baseURL: VIDISPINE_URL,
+      token,
+      username: VIDISPINE_ACCESS_KEY,
+      password: VIDISPINE_SECRET_KEY,
+    });
     /**
      * Check server is online and credentials are valid
      */
@@ -59,6 +64,8 @@ module.exports.handler = async (event) => {
      */
     const { metadata: metadataType } = itemType;
     const metadata = parseMetadataType(metadataType, { flat: true, arrayOnSingleValue: false });
+
+    console.log(`Created Item: ${itemId}`);
 
     return {
       statusCode,

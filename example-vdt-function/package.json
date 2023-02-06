@@ -4,7 +4,9 @@
   "type": "commonjs",
   "main": "app.js",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "handler": "node -e 'require(\"./app\").handler()'"
+  },
   "eslintConfig": {
     "parserOptions": {
       "ecmaVersion": 2022,

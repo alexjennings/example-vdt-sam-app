@@ -16,6 +16,18 @@ This project contains settings and recommended extensions for VSCode. Install th
 example-vdt-sam-app$ cd example-vdt-function && npm install
 ```
 
+## Testing the NodeJS Function
+
+Environment variables must be set for the `VIDISPINE_URL` and either `VIDISPINE_TOKEN`, or both `VIDISPINE_ACCESS_KEY` and `VIDISPINE_SECRET_KEY`.
+
+```bash
+example-vdt-sam-app$ export VIDISPINE_URL="https://example.myvidispine.com"
+example-vdt-sam-app$ export VIDISPINE_TOKEN="aaaaaaaa+/1111111111"
+
+example-vdt-sam-app$ cd example-vdt-function
+example-vdt-sam-app$ npm run handler
+```
+
 ## Use the SAM CLI to build and test locally
 
 Build your application with the `sam build` command.
@@ -112,3 +124,5 @@ aws cloudformation delete-stack --stack-name example-vdt-sam-app
 ## Resources
 
 See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
+
+See [VDT developer guide](https://vidispine.github.io/vdt/dev/?path=/story/vdt-api-documentation--page) for Javascript SDKs.
